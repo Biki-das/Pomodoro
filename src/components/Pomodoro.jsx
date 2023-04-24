@@ -65,7 +65,7 @@ function Pomodoro({
                 className={`text-xs font-bold text-[#1e213f] lg:text-sm ${
                   currentSession === options.split(" ").join("")
                     ? "bg-[#f87070]"
-                    : "bg-none text-[#4e526b] transition-[color]  duration-[0.5s] hover:text-[#D7E0FF]"
+                    : "bg-none text-[#4e526b] transition-[color]  duration-[0.5s] lg:hover:text-[#D7E0FF]"
                 } h-[80%] w-[110px] rounded-full transition-[background,color] duration-[0.3s]`}
               >
                 {options}
