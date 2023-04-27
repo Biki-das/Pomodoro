@@ -6,6 +6,12 @@ import {
   STOP_TIMER,
   RESET_TIMER,
   DECREASE_TIMER,
+  SET_POMODORO_TIMER,
+  SET_SHORTBREAK_TIMER,
+  SET_LONGBREAK_TIMER,
+  SET_DRAFT_POMODORO_TIMER,
+  SET_DRAFT_SHORTBREAK_TIMER,
+  SET_DRAFT_LONGBREAK_TIMER,
 } from "./action";
 
 const initialState = {
@@ -14,6 +20,9 @@ const initialState = {
   pomodoroStartTime: 25 * 60,
   shortBreakStartTime: 5 * 60,
   longBreakStartTime: 15 * 60,
+  draftPomodoroStartTime: 25,
+  draftshortBreakStartTime: 5,
+  draftlongBreakStartTime: 15,
   isRunning: false,
   font: "Roboto",
   color: "orange",
@@ -45,13 +54,25 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         timer: state.timer - 1,
+        pomodoroStartTime:
+          state.currentSession === "pomodoro"
+            ? state.pomodoroStartTime - 1
+            : state.pomodoroStartTime,
+        shortBreakStartTime:
+          state.currentSession === "shortbreak"
+            ? state.shortBreakStartTime - 1
+            : state.shortBreakStartTime,
+        longBreakStartTime:
+          state.currentSession === "longbreak"
+            ? state.longBreakStartTime - 1
+            : state.longBreakStartTime,
         progress: Math.round(
           ((state.timer - 1) /
             (state.currentSession === "pomodoro"
-              ? state.pomodoroStartTime
+              ? state.draftPomodoroStartTime * 60
               : state.currentSession === "shortbreak"
-              ? state.shortBreakStartTime
-              : state.longBreakStartTime)) *
+              ? state.draftshortBreakStartTime * 60
+              : state.draftlongBreakStartTime * 60)) *
             100
         ),
       };
@@ -63,10 +84,10 @@ export function reducer(state = initialState, action) {
       ...state,
       timer:
         state.currentSession === "pomodoro"
-          ? state.pomodoroStartTime
+          ? state.draftPomodoroStartTime * 60
           : state.currentSession === "shortbreak"
-          ? state.shortBreakStartTime
-          : state.longBreakStartTime,
+          ? state.draftshortBreakStartTime * 60
+          : state.draftlongBreakStartTime * 60,
       progress: 100,
       isRunning: false,
     };
@@ -98,6 +119,62 @@ export function reducer(state = initialState, action) {
     return {
       ...state,
       theme: action.payload,
+    };
+  }
+
+  if (action.type === SET_POMODORO_TIMER) {
+    return {
+      ...state,
+      pomodoroStartTime: Number(state.draftPomodoroStartTime * 60),
+      progress: 100,
+      timer:
+        state.timer === state.pomodoroStartTime
+          ? Number(state.draftPomodoroStartTime * 60)
+          : state.timer,
+    };
+  }
+
+  if (action.type === SET_DRAFT_POMODORO_TIMER) {
+    return {
+      ...state,
+      draftPomodoroStartTime: action.payload,
+    };
+  }
+
+  if (action.type === SET_SHORTBREAK_TIMER) {
+    return {
+      ...state,
+      shortBreakStartTime: Number(state.draftshortBreakStartTime * 60),
+      timer:
+        state.timer === state.shortBreakStartTime
+          ? Number(state.draftshortBreakStartTime) * 60
+          : state.timer,
+    };
+  }
+
+  if (action.type === SET_DRAFT_SHORTBREAK_TIMER) {
+    return {
+      ...state,
+      draftshortBreakStartTime: action.payload,
+    };
+  }
+
+  if (action.type === SET_LONGBREAK_TIMER) {
+    return {
+      ...state,
+      longBreakStartTime: Number(state.draftlongBreakStartTime * 60),
+      timer:
+        state.timer === state.longBreakStartTime
+          ? Number(state.draftlongBreakStartTime * 60)
+          : state.timer,
+    };
+  }
+
+  if (action.type === SET_DRAFT_LONGBREAK_TIMER) {
+    console.log(action.payload);
+    return {
+      ...state,
+      draftlongBreakStartTime: action.payload,
     };
   }
 

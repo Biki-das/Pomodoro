@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   startTimer,
@@ -11,7 +11,7 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import toast, { Toaster } from "react-hot-toast";
 import Progressbar from "./Progressbar";
-import { Settings } from "react-feather";
+import Settingmodal from "./Settingmodal";
 
 const pomodoroTimers = ["pomodoro", "short break", "long break"];
 
@@ -54,7 +54,7 @@ function Pomodoro({
       <section className="mx-auto mt-8 flex h-[60px] w-[90%] items-center justify-around rounded-full bg-[#161932] px-1 text-[#d7e0ff] md:w-[60%] md:px-0 lg:w-[50%]">
         {pomodoroTimers.map((options) => {
           return (
-            <>
+            <Fragment key={options}>
               <button
                 disabled={currentSession === options.split(" ").join("")}
                 onClick={(e) => {
@@ -70,7 +70,7 @@ function Pomodoro({
               >
                 {options}
               </button>
-            </>
+            </Fragment>
           );
         })}
       </section>
@@ -85,9 +85,9 @@ function Pomodoro({
         />
       </div>
       <Toaster />
-      <button className="absolute bottom-8 left-0 right-0 mx-auto flex  h-[50px] w-[50px] items-center justify-center lg:bottom-6">
-        <Settings className="setting-icon cursor-pointer" size={28} />
-      </button>
+      <div className="absolute bottom-8 left-0 right-0 mx-auto flex  h-[50px] w-[50px] items-center justify-center lg:bottom-2">
+        <Settingmodal />
+      </div>
     </div>
   );
 }

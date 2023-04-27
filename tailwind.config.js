@@ -4,15 +4,17 @@ export default {
   theme: {
     extend: {
       animation: {
-        reveal: "reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0.5s",
+        contentShow: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
-        reveal: {
+        contentShow: {
           "0%": {
-            transform: "translate(0,100%)",
+            opacity: 0,
+            transform: "translate(-50%, -48%) scale(0.96)",
           },
           "100%": {
-            transform: "translate(0,0)",
+            opacity: 1,
+            transform: "translate(-50%, -50%) scale(1)",
           },
         },
       },
