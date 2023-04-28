@@ -43,9 +43,10 @@ function Progressbar({
             {formatTime(timer)}
           </span>
           {timer > 0 ? (
+            // <!-- text-Orange text-Teal text-Purple
             <button
               id="action"
-              className={`text-white transition-[color] duration-[0.3s] lg:hover:text-${currentColor}`}
+              className={`text-white transition-[color] duration-[0.3s] lg:hover:text-${"Orange"}`}
               onClick={isRunning ? stopTimer : startTimer}
             >
               {`${isRunning ? `P A U S E` : `S T A R T`}`}

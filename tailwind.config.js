@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  safelist: ["bg-[#f87070]", "bg-[#70F3F8]", "bg-[#D881F8]"],
+  safelist: ["bg-[#f87070]", "bg-[#70F3F8]", "bg-[#D881F8]", "text-[#f87070]"],
   theme: {
     extend: {
       colors: {

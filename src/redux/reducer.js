@@ -88,6 +88,9 @@ export function reducer(state = initialState, action) {
           : state.currentSession === "shortbreak"
           ? state.draftshortBreakStartTime * 60
           : state.draftlongBreakStartTime * 60,
+      pomodoroStartTime: state.draftPomodoroStartTime * 60,
+      shortBreakStartTime: state.draftshortBreakStartTime * 60,
+      longBreakStartTime: state.draftlongBreakStartTime * 60,
       progress: 100,
       isRunning: false,
     };
