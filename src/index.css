@@ -11,6 +11,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: unset;
   }
 
   @layer utilities {
@@ -38,14 +39,6 @@
   color: #d7e0ff;
 }
 
-a
-/* reset */
-button,
-fieldset,
-input {
-  all: unset;
-}
-
 .DialogOverlay {
   background-color: var(--blackA9);
   position: fixed;
@@ -54,6 +47,7 @@ input {
 }
 
 .DialogContent {
+  font-family: inherit;
   background-color: white;
   border-radius: 18px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
@@ -195,4 +189,8 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+input[type="radio"].font:checked + label {
+  color: white;
 }

@@ -24,8 +24,8 @@ const initialState = {
   draftshortBreakStartTime: 5,
   draftlongBreakStartTime: 15,
   isRunning: false,
-  font: "Roboto",
-  color: "orange",
+  currentFont: "Kumbhsans",
+  currentColor: "Orange",
   progress: 100,
 };
 
@@ -101,24 +101,24 @@ export function reducer(state = initialState, action) {
       currentSession: action.payload,
       timer:
         action.payload === "pomodoro"
-          ? state.pomodoroStartTime
+          ? state.draftPomodoroStartTime * 60
           : action.payload === "shortbreak"
-          ? state.shortBreakStartTime
-          : state.longBreakStartTime,
+          ? state.draftshortBreakStartTime * 60
+          : state.draftlongBreakStartTime * 60,
     };
   }
 
   if (action.type === SET_FONT) {
     return {
       ...state,
-      font: action.payload,
+      currentFont: action.payload,
     };
   }
 
   if (action.type === SET_THEME) {
     return {
       ...state,
-      theme: action.payload,
+      currentColor: action.payload,
     };
   }
 

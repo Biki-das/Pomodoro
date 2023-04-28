@@ -12,6 +12,7 @@ import "react-circular-progressbar/dist/styles.css";
 import toast, { Toaster } from "react-hot-toast";
 import Progressbar from "./Progressbar";
 import Settingmodal from "./Settingmodal";
+import { colors } from "../utils/color";
 
 const pomodoroTimers = ["pomodoro", "short break", "long break"];
 
@@ -26,6 +27,8 @@ function Pomodoro({
   currentSession,
   resetTimer,
   setSession,
+  currentFont,
+  currentColor,
 }) {
   useEffect(() => {
     let intervalid = null;
@@ -46,8 +49,10 @@ function Pomodoro({
     );
 
   return (
-    <div className="mx-auto mt-16 h-[90vh] font-Kumbhsans md:w-[80%] lg:mt-4 lg:w-[50%]">
-      <h1 className="text-center text-2xl font-semibold text-[#d7e0ff] ">
+    <div
+      className={`mx-auto mt-16 h-[90vh] font-${currentFont} md:w-[80%] lg:mt-4 lg:w-[50%]`}
+    >
+      <h1 className={`text-center text-2xl font-semibold text-[#d7e0ff]`}>
         pomodoro
       </h1>
 
@@ -64,7 +69,7 @@ function Pomodoro({
                 }}
                 className={`text-xs font-bold text-[#1e213f] lg:text-sm ${
                   currentSession === options.split(" ").join("")
-                    ? "bg-[#f87070]"
+                    ? `bg-[${colors[currentColor]}]`
                     : "bg-none text-[#4e526b] transition-[color]  duration-[0.5s] lg:hover:text-[#D7E0FF]"
                 } h-[80%] w-[110px] rounded-full transition-[background,color] duration-[0.3s]`}
               >
@@ -82,6 +87,7 @@ function Pomodoro({
           stopTimer={stopTimer}
           isRunning={isRunning}
           resetTimer={resetTimer}
+          currentColor={currentColor}
         />
       </div>
       <Toaster />
@@ -98,6 +104,8 @@ function mapStateToProps(state) {
     isRunning: state.isRunning,
     progress: state.progress,
     currentSession: state.currentSession,
+    currentFont: state.currentFont,
+    currentColor: state.currentColor,
   };
 }
 

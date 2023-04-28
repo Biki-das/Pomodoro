@@ -1,6 +1,7 @@
 import { formatTime } from "../utils/formatTime";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { colors } from "../utils/color";
 
 function Progressbar({
   timer,
@@ -9,6 +10,7 @@ function Progressbar({
   stopTimer,
   isRunning,
   resetTimer,
+  currentColor,
 }) {
   return (
     <div className="mx-auto h-[90%] w-[90%]">
@@ -19,7 +21,7 @@ function Progressbar({
         backgroundPadding={3}
         styles={{
           path: {
-            stroke: "#f87070",
+            stroke: `${colors[currentColor]}`,
             strokeLinecap: "round",
             transition: "stroke-dashoffset 0.5s ease 0s",
           },
@@ -43,7 +45,7 @@ function Progressbar({
           {timer > 0 ? (
             <button
               id="action"
-              className="text-white transition-[color] duration-[0.3s] lg:hover:text-[#f87070]"
+              className={`text-white transition-[color] duration-[0.3s] lg:hover:text-${currentColor}`}
               onClick={isRunning ? stopTimer : startTimer}
             >
               {`${isRunning ? `P A U S E` : `S T A R T`}`}

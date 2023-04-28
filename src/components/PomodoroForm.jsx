@@ -13,10 +13,13 @@ function PomdoroForm({
   setDraftPomodoroTimer,
   setDraftshortBreakTimer,
   setDraftLongBreakTimer,
+  currentFont,
 }) {
   return (
     <>
-      <div className="mx-auto mt-6 w-[90%] justify-between md:flex">
+      <div
+        className={`mx-auto mt-6 w-[90%] justify-between font-${currentFont} md:flex md:gap-x-4`}
+      >
         <div className="flex items-center justify-between md:flex-col md:items-start">
           <label
             htmlFor="pomodoro"
@@ -28,15 +31,15 @@ function PomdoroForm({
             <input
               id="pomodoro"
               type="number"
-              className="mt-2 h-[50px] w-[80%] rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
+              className="mt-2 h-[50px] w-full rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
               value={draftPomodoroStartTime}
               onChange={(e) => {
                 setDraftPomodoroTimer(e.target.valueAsNumber);
               }}
             />
-            <div className="absolute right-6 top-[30%]">
+            <div className="absolute right-1 top-[30%]">
               <button
-                className="block"
+                className="block "
                 onClick={() => {
                   setDraftPomodoroTimer(Number(draftPomodoroStartTime) + 1);
                 }}
@@ -69,13 +72,13 @@ function PomdoroForm({
             <input
               id="shortbreak"
               type="number"
-              className="mt-2 h-[50px] w-[80%] rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
+              className="mt-2 h-[50px] w-full rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
               value={draftShortBreakStartTime}
               onChange={(e) => {
                 setDraftshortBreakTimer(e.target.valueAsNumber);
               }}
             />
-            <div className="absolute right-6 top-[30%]">
+            <div className="absolute right-1 top-[30%]">
               <button
                 className="block"
                 onClick={() => {
@@ -110,13 +113,13 @@ function PomdoroForm({
             <input
               id="longbreak"
               type="number"
-              className="mt-2 h-[50px] w-[80%] rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
+              className="mt-2 h-[50px] w-full rounded-xl bg-[#eff1fa] px-2 text-xs font-bold focus:outline-none"
               value={draftLongBreakStartTime}
               onChange={(e) => {
                 setDraftLongBreakTimer(e.target.valueAsNumber);
               }}
             />
-            <div className="absolute right-6 top-[30%]">
+            <div className="absolute right-1 top-[30%]">
               <button
                 className="block"
                 onClick={() => {
