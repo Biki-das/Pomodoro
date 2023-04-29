@@ -14,7 +14,7 @@ import {
   SET_DRAFT_LONGBREAK_TIMER,
 } from "./action";
 
-const initialState = {
+export const initialState = {
   currentSession: "pomodoro",
   timer: 25 * 60,
   pomodoroStartTime: 25 * 60,

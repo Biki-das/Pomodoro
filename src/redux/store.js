@@ -1,16 +1,12 @@
 import { reducer } from "./reducer";
 import { createStore } from "redux";
-import {
-  setDraftLongTimer,
-  setDraftPomodoroTimer,
-  setDraftShortTimer,
-  setLongbreakTimer,
-  setPomodoroTimer,
-  setShortbreakTimer,
-} from "./action";
+import { initialState } from "./reducer";
 
-export const store = createStore(reducer);
+export const store = createStore(
+  reducer,
+  JSON.parse(localStorage.getItem("state")) || initialState
+);
 
 store.subscribe(() => {
-  console.log(store.getState());
+  localStorage.setItem("state", JSON.stringify(store.getState()));
 });
