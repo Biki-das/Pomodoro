@@ -68,7 +68,7 @@ function Pomodoro({
                     ? changeErrorNotify()
                     : setSession(e.target.textContent.split(" ").join(""));
                 }}
-                className={`text-xs font-bold text-[#1e213f] lg:text-sm`}
+                className={`text-xs font-bold text-[#4e526b] transition-[color] duration-[0.3s] lg:text-sm lg:hover:text-[#D7E0FF]`}
               >
                 {options}
               </button>
@@ -76,21 +76,21 @@ function Pomodoro({
           );
         })}
         <motion.div
+          initial={false}
           transition={{
             type: "spring",
             stiffness: 400,
-            damping: 42,
+            damping: 30,
           }}
-          initial={false}
           animate={{
             x:
-              (currentSession === "pomodoro" && 10) ||
-              (currentSession === "shortbreak" && 150) ||
-              (currentSession === "longbreak" && 280),
+              (currentSession === "pomodoro" && "-100%") ||
+              (currentSession === "shortbreak" && "0%") ||
+              (currentSession === "longbreak" && "100%"),
           }}
-          className={`bg-[${colors[currentColor]}] absolute left-0 rounded-full px-4 py-3 text-xs lg:text-sm`}
+          className={`absolute flex h-[50px] w-[32%] translate-x-[-100%] items-center justify-center rounded-full px-8 py-4 font-bold text-[#1e213f]  bg-[${colors[currentColor]}]`}
         >
-          {currentSession}
+          <p>{currentSession}</p>
         </motion.div>
       </section>
       <div className="mx-auto mt-14 flex h-[330px] w-[330px] items-center justify-center rounded-full  bg-gradient-to-r from-[#0e112a] to-[#2e325a] shadow-[-40px_-27px_42px_5px_#2e325a] md:h-[350px]  md:w-[350px] lg:h-[400px] lg:w-[400px]">
