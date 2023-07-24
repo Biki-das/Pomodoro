@@ -12,6 +12,7 @@ import "react-circular-progressbar/dist/styles.css";
 import toast, { Toaster } from "react-hot-toast";
 import Progressbar from "./Progressbar";
 import Settingmodal from "./Settingmodal";
+import { motion, transform } from "framer-motion";
 import { colors } from "../utils/color";
 
 const pomodoroTimers = ["pomodoro", "short break", "long break"];
@@ -56,7 +57,7 @@ function Pomodoro({
         pomodoro
       </h1>
 
-      <section className="mx-auto mt-8 flex h-[60px] w-[90%] items-center justify-around rounded-full bg-[#161932] px-1 text-[#d7e0ff] md:w-[60%] md:px-0 lg:w-[50%]">
+      <section className="relative mx-auto mt-8 flex h-[60px] w-[90%] items-center justify-around rounded-full bg-[#161932] px-1 text-[#d7e0ff] md:w-[60%] md:px-0 lg:w-[50%]">
         {pomodoroTimers.map((options) => {
           return (
             <Fragment key={options}>
@@ -67,17 +68,30 @@ function Pomodoro({
                     ? changeErrorNotify()
                     : setSession(e.target.textContent.split(" ").join(""));
                 }}
-                className={`text-xs font-bold text-[#1e213f] lg:text-sm ${
-                  currentSession === options.split(" ").join("")
-                    ? `bg-[${colors[currentColor]}]`
-                    : "bg-none text-[#4e526b] transition-[color]  duration-[0.5s] lg:hover:text-[#D7E0FF]"
-                } h-[80%] w-[110px] rounded-full transition-[background,color] duration-[0.3s]`}
+                className={`text-xs font-bold text-[#1e213f] lg:text-sm`}
               >
                 {options}
               </button>
             </Fragment>
           );
         })}
+        <motion.div
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 42,
+          }}
+          initial={false}
+          animate={{
+            x:
+              (currentSession === "pomodoro" && 10) ||
+              (currentSession === "shortbreak" && 150) ||
+              (currentSession === "longbreak" && 280),
+          }}
+          className={`bg-[${colors[currentColor]}] absolute left-0 rounded-full px-4 py-3 text-xs lg:text-sm`}
+        >
+          {currentSession}
+        </motion.div>
       </section>
       <div className="mx-auto mt-14 flex h-[330px] w-[330px] items-center justify-center rounded-full  bg-gradient-to-r from-[#0e112a] to-[#2e325a] shadow-[-40px_-27px_42px_5px_#2e325a] md:h-[350px]  md:w-[350px] lg:h-[400px] lg:w-[400px]">
         <Progressbar
